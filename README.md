@@ -30,8 +30,10 @@ Refer to this page for setting up Ardupolit SITL: https://ardupilot.org/dev/docs
 
 Make sure to install all submodules if things don't work as intended. 
 
-`git clone --recurse-submodules https://github.com/ArduPilot/ardupilot
-cd ardupilot`
+```
+git clone --recurse-submodules https://github.com/ArduPilot/ardupilot
+cd ardupilot
+```
 
 Don't forget to install the required packages as suggested in the documentation and adding to linux profile. 
 

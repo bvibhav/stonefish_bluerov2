@@ -79,9 +79,6 @@ class Patch(Node):
         pwm_thrusters = pwm[0:8]
         pwm_setpoint = [(x-1500)/400 for x in pwm_thrusters]
 
-        # NOTE: Temp fix for QGC max 1700 pwm issue
-        pwm_setpoint = [x*2 for x in pwm_setpoint]
-
         # pwm_setpoint[0] *= 1
         # pwm_setpoint[1] *= 1
         # pwm_setpoint[2] *= 1

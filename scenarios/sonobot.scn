@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<scenario>
+	<looks>
+		<look name="black" gray="0.05" roughness="0.2"/>
+		<look name="yellow" rgb="1.0 0.9 0.0" roughness="0.3"/>
+		<look name="orange" rgb="0.9 0.1 0.0" roughness="0.3"/>
+		<look name="gray" gray="0.5" roughness="0.4" metalness="0.5"/>
+		<look name="ltgray" gray="0.75" roughness="1.0" metalness="0.0"/>
+		<look name="tank" rgb="0.9 0.9 0.9" roughness="0.9"/>
+		<look name="duct" gray="0.1" roughness="0.4" metalness="0.5"/>
+	</looks>
+
+	<robot name="$(arg vehicle_name)" fixed="false" self_collisions="false">
+		<base_link name="base_link" type="compound" physics="submerged">
+			<external_part name="SonobotTop" type="model" physics="submerged" buoyant="false">
+				<physical>
+					<mesh filename="sonobot/sonobot_top.obj" scale="1.0"/>
+					<thickness value="0.003"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</physical>
+				<visual>
+					<mesh filename="sonobot/sonobot_top.obj" scale="1.0"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</visual>
+				<material name="Fiberglass"/>
+				<look name="orange"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.07"/>
+			</external_part>
+
+			<external_part name="HullPort" type="model" physics="submerged" buoyant="false">
+				<physical>
+					<mesh filename="girona500/hull_phy.obj" scale="1.0"/>
+					<thickness value="0.003"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</physical>
+				<visual>
+					<mesh filename="girona500/hull.obj" scale="1.0"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</visual>
+				<material name="Fiberglass"/>
+				<look name="duct"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="-0.049 -0.4 0.0"/>
+			</external_part>
+
+			<external_part name="HullStarboard" type="model" physics="submerged" buoyant="false">
+				<physical>
+					<mesh filename="girona500/hull_phy.obj" scale="1.0"/>
+					<thickness value="0.003"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</physical>
+				<visual>
+					<mesh filename="girona500/hull.obj" scale="1.0"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</visual>
+				<material name="Fiberglass"/>
+				<look name="duct"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="-0.049 0.4 0.0"/>
+			</external_part>
+
+			<external_part name="Crossbar" type="box" physics="submerged" buoyant="false">
+			    <dimensions xyz="0.04 0.7 0.02"/>
+    			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+				<material name="Aluminium"/>
+				<look name="ltgray"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="0.2 0.0 -0.15"/>
+			</external_part>
+
+			<external_part name="Crossbar" type="box" physics="submerged" buoyant="false">
+			    <dimensions xyz="0.04 0.7 0.02"/>
+    			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+				<material name="Aluminium"/>
+				<look name="ltgray"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="-0.2 0.0 -0.15"/>
+			</external_part>
+
+			<external_part name="DuctSurgePort" type="model" physics="submerged">
+				<physical>
+					<mesh filename="girona500/duct_phy.obj" scale="0.5"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</physical>
+				<visual>
+					<mesh filename="girona500/duct.obj" scale="0.5"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</visual>
+				<material name="Neutral"/>
+				<look name="duct"/>
+				<compound_transform rpy="1.571 0.0 0.0" xyz="-0.7 -0.4 0.14"/>
+			</external_part>
+
+			<external_part name="DuctSurgeStarboard" type="model" physics="submerged">
+				<physical>
+					<mesh filename="girona500/duct_phy.obj" scale="0.5"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</physical>
+				<visual>
+					<mesh filename="girona500/duct.obj" scale="0.5"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</visual>
+				<material name="Neutral"/>
+				<look name="duct"/>
+				<compound_transform rpy="1.571 0.0 0.0" xyz="-0.7 0.4 0.14"/>
+			</external_part>
+
+			<external_part name="Antenna" type="model" physics="submerged">
+				<physical>
+					<mesh filename="girona500/antenna_phy.obj" scale="1.0"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</physical>
+				<visual>
+					<mesh filename="girona500/antenna.obj" scale="1.0"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</visual>
+				<material name="Fiberglass"/>
+				<look name="black"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="-0.15 0.0 -0.15"/>
+			</external_part>
+
+			<internal_part name="TopCylinder" type="cylinder" physics="submerged" buoyant="false">
+				<dimensions radius="0.05" height="0.5"/>
+				<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				<material name="Neutral"/>
+				<mass value="5.0"/>
+				<look name="manipulator"/>
+				<compound_transform rpy="0.0 1.571 0.0" xyz="-0.0 0.0 -0.2"/>
+			</internal_part>
+
+			<internal_part name="PortCylinder" type="cylinder" physics="submerged" buoyant="true">
+				<dimensions radius="0.1" height="1.25"/>
+				<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				<material name="Neutral"/>
+				<mass value="15.0"/>
+				<look name="manipulator"/>
+				<compound_transform rpy="0.0 1.571 0.0" xyz="-0.05 -0.4 0.0"/>
+			</internal_part>
+
+			<internal_part name="StarboardCylinder" type="cylinder" physics="submerged" buoyant="true">
+				<dimensions radius="0.1" height="1.25"/>
+				<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				<material name="Neutral"/>
+				<mass value="15.0"/>
+				<look name="manipulator"/>
+				<compound_transform rpy="0.0 1.571 0.0" xyz="-0.05 0.4 0.0"/>
+			</internal_part>
+		</base_link>
+
+		<sensor name="dynamics" type="odometry" rate="30.0">
+			<link name="base_link"/>
+			<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.25"/>
+			<ros_publisher topic="/$(arg vehicle_name)/odometry"/>
+		</sensor>
+
+		<!-- <sensor name="dvl" type="dvl" rate="5.0">
+			<link name="base_link"/>
+			<origin rpy="3.1416 0.0 -0.785" xyz="-0.75 0.0 0.4"/>
+			<specs beam_angle="30.0"/>
+			<range velocity="9.0 9.0 9.0" altitude_min="0.5" altitude_max="81.0"/>
+			<noise velocity="0.0015" altitude="0.001"/>
+			<ros_publisher topic="/girona500/navigator/dvl_sim" altitude_topic="/girona500/navigator/altitude"/>
+		</sensor> -->
+
+		<sensor name="imu_filter" type="imu" rate="20.0">
+			<link name="base_link"/>
+			<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.25"/>
+			<noise angle="0.000001745" angular_velocity="0.00001745"/>
+			<ros_publisher topic="/$(arg vehicle_name)/imu"/>
+		</sensor>
+
+		<sensor name="gps" type="gps" rate="1.0">
+			<link name="base_link"/>
+			<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.25"/>
+			<noise ned_position="0.5"/>
+			<ros_publisher topic="/$(arg vehicle_name)/gps"/>
+		</sensor>
+
+		<!-- <sensor name="camera_front" type="camera" rate="20.0">
+			<link name="base_link"/>
+			<origin rpy="1.571 0.0 1.571" xyz="0.4 0.0 -0.25"/>
+			<specs resolution_x="800" resolution_y="600" horizontal_fov="55.0"/>
+			<ros_publisher topic="/sonobot/camera"/>
+		</sensor> -->
+
+		<actuator name="ThrusterSurgePort" type="thruster">
+			<link name="base_link"/>
+			<origin rpy="3.1416 0.0 0.0" xyz="-0.7 -0.4 0.14"/>
+			<specs thrust_coeff="0.52" torque_coeff="0.05" max_rpm="5000.0" inverted="false"/>
+			<propeller diameter="0.09" right="true">
+				<mesh filename="girona500/propeller.obj" scale="0.5"/>
+				<material name="Neutral"/>
+				<look name="propeller"/>
+			</propeller>
+		</actuator>
+
+		<actuator name="ThrusterSurgeStarboard" type="thruster">
+			<link name="base_link"/>
+			<origin rpy="0.0 0.0 0.0" xyz="-0.7 0.4 0.14"/>
+			<specs thrust_coeff="0.52" torque_coeff="0.05" max_rpm="5000.0" inverted="true"/>
+			<propeller diameter="0.09" right="false">
+				<mesh filename="girona500/propeller.obj" scale="0.5"/>
+				<material name="Neutral"/>
+				<look name="propeller"/>
+			</propeller>
+		</actuator>
+
+		<world_transform xyz="$(arg position)" rpy="$(arg orientation)"/>
+
+		<ros_subscriber thrusters="/$(arg vehicle_name)/setpoint/pwm"/>
+		<!-- <ros_publisher thrusters="/sonobot/thruster_state"/> -->
+	</robot>
+</scenario>
