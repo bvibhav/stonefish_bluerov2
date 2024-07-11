@@ -168,7 +168,7 @@
 		<sensor name="gps" type="gps" rate="1.0">
 			<link name="base_link"/>
 			<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.25"/>
-			<noise ned_position="0.5"/>
+			<noise ned_position="0.1"/>
 			<ros_publisher topic="/$(arg vehicle_name)/gps"/>
 		</sensor>
 

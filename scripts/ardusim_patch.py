@@ -14,12 +14,12 @@ from nav_msgs.msg import Odometry
 
 from tf_transformations import quaternion_from_euler, euler_from_quaternion
 
-class Patch(Node):
-    def __init__(self, node_name):
-        super().__init__(node_name, namespace='bluerov2')
-        # Placeholders to keep code clean
-        # gen_pub = self.create_publisher
+import numpy as np
 
+class Patch(Node):
+    def __init__(self, node_name, namespace):
+        super().__init__(node_name, namespace=namespace)
+       
         # Subscribers
         self.create_subscription(Imu, "imu", self._imu_callback, 1),
         self.create_subscription(NavSatFix, "gps", self._gps_callback, 1),
@@ -39,6 +39,8 @@ class Patch(Node):
         self.gps = None
         self.odom = None
 
+        self.namespace = namespace
+
     def _imu_callback(self, msg):
         self.imu = msg
 
@@ -50,8 +52,11 @@ class Patch(Node):
 
     def looper(self):
         if self.imu is None or self.odom is None:
-            print("Wating for ODOM or IMU")
-            return 
+            self.get_logger().info("Wating for callbacks", once=False)
+            time.sleep(.5)
+            return
+        
+        self.get_logger().info("Callbacks received", once=True)
         
         try:
             data, address = self.sock_sitl.recvfrom(100)
@@ -76,21 +81,17 @@ class Patch(Node):
         frame_count = decoded[2]
         pwm = decoded[3:]
 
-        pwm_thrusters = pwm[0:8]
-        pwm_setpoint = [(x-1500)/400 for x in pwm_thrusters]
+        if self.namespace=='bluerov2':
+            pwm_thrusters = pwm[0:8]
+            pwm_setpoint = [(x-1500)/400 for x in pwm_thrusters]
 
-        # pwm_setpoint[0] *= 1
-        # pwm_setpoint[1] *= 1
-        # pwm_setpoint[2] *= 1
-        # pwm_setpoint[3] *= 1
-        # pwm_setpoint[4] *= 1
-        # pwm_setpoint[5] *= 1
-        # pwm_setpoint[6] *= 1
-        # pwm_setpoint[7] *= 1
+        if self.namespace=='blueboat':
+            TAM = np.array([[.5, .5],[1, -1]])
+            pwm_setpoint_polar = np.array([(pwm[2]-1500)/500, (pwm[0]-1500)/500])
+            pwm_setpoint = np.matmul(np.linalg.pinv(TAM), pwm_setpoint_polar)
 
-        msg_pwm = Float64MultiArray()
-        msg_pwm.data = pwm_setpoint
-        print(msg_pwm.data)
+        # print(pwm_setpoint)
+        msg_pwm = Float64MultiArray(data=pwm_setpoint)
 
         # Publish pwm 
         self.pub_pwm.publish(msg_pwm)
@@ -121,10 +122,6 @@ class Patch(Node):
             self.odom.twist.twist.angular.z,
         )
         
-        # print(self.odom.twist)
-        # print(self.odom.twist.twist.angular)
-        # print()
-        
         c_time = self.get_clock().now().to_msg()
         c_time = c_time.sec + c_time.nanosec/1e9
 
@@ -138,7 +135,7 @@ class Patch(Node):
             "imu" : IMU_fmt,
             "position" : pose_position,
             "attitude" : pose_attitude,
-            "velocity" : twist_linear
+            "velocity" : twist_linear,                          
         }
         JSON_string = "\n" + json.dumps(JSON_fmt,separators=(',', ':')) + "\n"
 
@@ -149,7 +146,8 @@ class Patch(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    patch = Patch(node_name="ardusim_patch")
+    patch = Patch(node_name="ardusim_patch", namespace='bluerov2')
+    # patch = Patch(node_name="ardusim_patch", namespace='blueboat')
     
     rclpy.spin(patch)
 
