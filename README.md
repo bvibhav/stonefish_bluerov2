@@ -8,7 +8,8 @@ Requirements:
 - ROS2 with colon and DDS backend.
 - Stonefish Simulator installed as library.
 - Stonefish ROS2 wrapper.
-- Ardupilot STIL installation
+- Ardupilot SITL installation
+- OPTIONAL: ROS2 BlueROV2 driver: https://github.com/bvibhav/bluerov2_interface
 
 # ROS2
 Refer to installation at https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html
@@ -74,20 +75,39 @@ Run this command to start SITL with JSON simulator instead. This will let us con
 sim_vehicle.py -v ArduSub --model JSON  --map -L PHILL -m --streamrate=-1
 ```
 
-This will complain about link 1 down as STIL is not getting anything from simulator side. 
+This will complain about link 1 down as SITL is not getting anything from simulator side. 
 
 # Buidling/Running this Simulation
 - Clone this repository to your colcon workspace.
 - Build the package using symlink method like this: 
 
-    `colcon build --event-handlers console_direct+ --cmake-args --symlink-install --packages-select`
+    ```
+    colcon build --event-handlers console_direct+ --cmake-args --symlink-install --packages-select stonefish_bluerov2
+    ```
 
 - Then launch the simulation: 
 
-    `ros2 launch stonefish_bluerov2 bluerov2_sim.py`
+    ```
+    ros2 launch stonefish_bluerov2 bluerov2_sim.py
+    ```
 
 - Finally, open QGroundControl, got to vehicle setup and chnage the vehicle configuation to `Vectored-6DOF`.
 - Also enable jostick intput in QGC. 
 
 At this point, you are setup and should be able to control the vehicle using QGC or BlueROV2 driver of your choice. 
-    
+
+You can use a barebones ROS2 driver from here: https://github.com/bvibhav/bluerov2_interface
+
+# Running Rover/Boat Simulation
+- Vehicle frame `-v Rover` or `-v ArduSub` is not required if running in firmware type folder. This ideal if you are going to run multiple firmware using same Ardupilot directory. 
+    ```
+    cd ~/ardupilot/Rover
+    sim_vehicle.py --model JSON --map -L PHILL -m --streamrate=-1
+    ```
+
+- Run the simulation side of things. 
+    ```
+    ros2 launch stonefish_bluerov2 blueboat_sim.py
+    ```
+
+- Run QGroundControl and for the first time loat the default parameters from here: https://github.com/bluerobotics/Blueos-Parameter-Repository/tree/master/params/ardupilot/ArduRover/4.5/Navigator
