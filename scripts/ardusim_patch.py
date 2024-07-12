@@ -39,7 +39,7 @@ class Patch(Node):
         self.gps = None
         self.odom = None
 
-        self.namespace = namespace
+        self.namespace = self.get_namespace()
 
     def _imu_callback(self, msg):
         self.imu = msg
@@ -81,14 +81,16 @@ class Patch(Node):
         frame_count = decoded[2]
         pwm = decoded[3:]
 
-        if self.namespace=='bluerov2':
+        if self.namespace=='/bluerov2':
             pwm_thrusters = pwm[0:8]
             pwm_setpoint = [(x-1500)/400 for x in pwm_thrusters]
 
-        if self.namespace=='blueboat':
+        if self.namespace=='/blueboat':
             TAM = np.array([[.5, .5],[1, -1]])
             pwm_setpoint_polar = np.array([(pwm[2]-1500)/500, (pwm[0]-1500)/500])
             pwm_setpoint = np.matmul(np.linalg.pinv(TAM), pwm_setpoint_polar)
+
+        # print(pwm_setpoint)
 
         # print(pwm_setpoint)
         msg_pwm = Float64MultiArray(data=pwm_setpoint)
