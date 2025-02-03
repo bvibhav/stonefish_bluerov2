@@ -179,22 +179,23 @@
 			<ros_publisher topic="/sonobot/camera"/>
 		</sensor> -->
 
-		<actuator name="ThrusterSurgePort" type="thruster">
-			<link name="base_link"/>
-			<origin rpy="3.1416 0.0 0.0" xyz="-0.7 -0.4 0.14"/>
-			<specs thrust_coeff="0.52" torque_coeff="0.05" max_rpm="5000.0" inverted="false"/>
-			<propeller diameter="0.09" right="true">
-				<mesh filename="girona500/propeller.obj" scale="0.5"/>
-				<material name="Neutral"/>
-				<look name="propeller"/>
-			</propeller>
-		</actuator>
 
 		<actuator name="ThrusterSurgeStarboard" type="thruster">
 			<link name="base_link"/>
 			<origin rpy="0.0 0.0 0.0" xyz="-0.7 0.4 0.14"/>
 			<specs thrust_coeff="0.52" torque_coeff="0.05" max_rpm="5000.0" inverted="true"/>
 			<propeller diameter="0.09" right="false">
+				<mesh filename="girona500/propeller.obj" scale="0.5"/>
+				<material name="Neutral"/>
+				<look name="propeller"/>
+			</propeller>
+		</actuator>
+
+		<actuator name="ThrusterSurgePort" type="thruster">
+			<link name="base_link"/>
+			<origin rpy="3.1416 0.0 0.0" xyz="-0.7 -0.4 0.14"/>
+			<specs thrust_coeff="0.52" torque_coeff="0.05" max_rpm="5000.0" inverted="true"/>
+			<propeller diameter="0.09" right="true">
 				<mesh filename="girona500/propeller.obj" scale="0.5"/>
 				<material name="Neutral"/>
 				<look name="propeller"/>

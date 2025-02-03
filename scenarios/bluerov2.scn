@@ -141,7 +141,7 @@
 		<actuator name="FrontRight" type="thruster">
 			<link name="base_link"/>
 			<origin xyz="0.1355 0.1 0.0725" rpy="0 0 -0.7853981634"/>
-			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3250.0" inverted="true"/>
+			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3600.0" inverted="true"/>
 			<propeller diameter="0.076" right="true">
 				<mesh filename="bluerov2/ccw.obj" scale="1.0"/>
 				<material name="Neutral"/>
@@ -153,7 +153,7 @@
 		<actuator name="FrontLeft" type="thruster">
 			<link name="base_link"/>
 			<origin xyz="0.1355 -0.1 0.0725" rpy="0 0 0.7853981634"/>
-			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3250.0" inverted="true"/>
+			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3600.0" inverted="true"/>
 			<propeller diameter="0.076" right="true">
 				<mesh filename="bluerov2/ccw.obj" scale="1.0"/>
 				<material name="Neutral"/>
@@ -165,7 +165,7 @@
 		<actuator name="BackRight" type="thruster">
 			<link name="base_link"/>
 			<origin xyz="-0.1475 0.1 0.0725" rpy="0 0 -2.3561944902"/>
-			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3250.0" inverted="false"/>
+			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3600.0" inverted="false"/>
 			<propeller diameter="0.076" right="false">
 				<mesh filename="bluerov2/cw.obj" scale="1.0"/>
 				<material name="Neutral"/>
@@ -177,7 +177,7 @@
 		<actuator name="BackLeft" type="thruster">
 			<link name="base_link"/>
 			<origin xyz="-0.1475 -0.1 0.0725" rpy="0 0 2.3561944902"/>
-			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3250.0" inverted="false"/>
+			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3600.0" inverted="false"/>
 			<propeller diameter="0.076" right="false">
 				<mesh filename="bluerov2/cw.obj" scale="1.0"/>
 				<material name="Neutral"/>
@@ -189,7 +189,7 @@
 		<actuator name="DiveFrontRight" type="thruster">
 			<link name="base_link"/>
 			<origin xyz="0.12 0.218 0.0" rpy="0 -1.5707963268 0"/>
-			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3250.0" inverted="false"/>
+			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3600.0" inverted="false"/>
 			<propeller diameter="0.076" right="true">
 				<mesh filename="bluerov2/cw.obj" scale="1.0"/>
 				<material name="Neutral"/>
@@ -201,7 +201,7 @@
 		<actuator name="DiveFrontLeft" type="thruster">
 			<link name="base_link"/>
 			<origin xyz="0.12 -0.218 0.0" rpy="0 -1.5707963268 0"/>
-			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3250.0" inverted="true"/>
+			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3600.0" inverted="true"/>
 			<propeller diameter="0.076" right="false">
 				<mesh filename="bluerov2/ccw.obj" scale="1.0"/>
 				<material name="Neutral"/>
@@ -213,7 +213,7 @@
 		<actuator name="DiveBackRight" type="thruster">
 			<link name="base_link"/>
 			<origin xyz="-0.12 0.218 0.0" rpy="0 -1.5707963268 0"/>
-			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3250.0" inverted="true"/>
+			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3600.0" inverted="true"/>
 			<propeller diameter="0.076" right="false">
 				<mesh filename="bluerov2/ccw.obj" scale="1.0"/>
 				<material name="Neutral"/>
@@ -225,7 +225,7 @@
 		<actuator name="DiveBackLeft" type="thruster">
 			<link name="base_link"/>
 			<origin xyz="-0.12 -0.218 0.0" rpy="0 -1.5707963268 0"/>
-			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3250.0" inverted="false"/>
+			<specs thrust_coeff="0.167" torque_coeff="0.016" max_rpm="3600.0" inverted="false"/>
 			<propeller diameter="0.076" right="true">
 				<mesh filename="bluerov2/cw.obj" scale="1.0"/>
 				<material name="Neutral"/>
@@ -305,25 +305,25 @@
 			<specs resolution_x="640" resolution_y="480" horizontal_fov="75.0"/>
 			<origin xyz="0.16 -0.0725 0.15" rpy="1.571 0.0 1.571"/>
 			<link name="base_link"/>
-			<ros_publisher topic="/bluerov2/left"/>
+			<ros_publisher topic="/$(arg vehicle_name)/left"/>
 		</sensor>
 		<sensor name="camera_right" rate="30.0" type="camera">
 			<specs resolution_x="640" resolution_y="480" horizontal_fov="75.0" baseline="-60.5"/>
 			<!-- <specs resolution_x="1000" resolution_y="800" horizontal_fov="60.0" baseline="-126.0"/> -->
 			<origin xyz="0.16 0.0725 0.15" rpy="1.571 0.0 1.571"/>
 			<link name="base_link"/>
-			<ros_publisher topic="/bluerov2/right"/>
+			<ros_publisher topic="/$(arg vehicle_name)/right"/>
 		</sensor>
 
-		<!-- <sensor name="multibeam" rate="1.0" type="multibeam">
+		<sensor name="multibeam" rate="10.0" type="multibeam">
 			<specs fov="90.0" steps="128"/>
-			<range distance_min="0.5" distance_max="50.0"/>
+			<range distance_min="0.25" distance_max="50.0"/>
 			<noise distance="0.1"/>
 			<history samples="1"/>
-			<origin xyz="0.0 0.0 0.3" rpy="0.0 -1.571 0.0"/>
+			<origin xyz="0.2 0.0 0.2" rpy="0.0 -0.0 0.0"/>
 			<link name="base_link"/>
 			<ros_publisher topic="/$(arg vehicle_name)/multibeam"/>
-		</sensor> -->
+		</sensor>
 
 		<!-- <sensor name="fls" type="fls">
 			<specs beams="256" bins="120" horizontal_fov="90.0" vertical_fov="30.0"/>

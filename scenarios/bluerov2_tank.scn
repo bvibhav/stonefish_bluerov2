@@ -60,7 +60,7 @@
 
 	<!-- OREINTATION  -->
 	<!-- Orientation with north -0.52 -->
-	<static name="Wavetank" type="model">
+	<!-- <static name="Wavetank" type="model">
 		<physical>
 			<mesh filename="wavetank.obj" scale="1.0"/>
 			<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
@@ -68,10 +68,10 @@
 		<material name="Rock"/>
 		<look name="tank"/>
 		<world_transform rpy="0.0 0.0 1.57" xyz="0.0 0.0 5.0"/>
-		<!-- <world_transform rpy="0.0 0.0 -.52" xyz="0.0 0.0 5.0"/> -->
-	</static>
+		<world_transform rpy="0.0 0.0 -.52" xyz="0.0 0.0 5.0"/>
+	</static> -->
 
-	<static name="Wavetank_floor" type="model">
+	<!-- <static name="Wavetank_floor" type="model">
 		<physical>
 			<mesh filename="wavetank_floor.obj" scale="1.0"/>
 			<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
@@ -79,8 +79,8 @@
 		<material name="Rock"/>
 		<look name="ltgray"/>
 		<world_transform rpy="0.0 0.0 1.57" xyz="0.0 0.0 -1.0"/>
-		<!-- <world_transform rpy="0.0 0.0 -.52" xyz="0.0 0.0 -1.0"/> -->
-	</static>
+		<world_transform rpy="0.0 0.0 -.52" xyz="0.0 0.0 -1.0"/>
+	</static> -->
 
 	<include file="$(find stonefish_bluerov2)/scenarios/bluerov2.scn">
 		<arg name="vehicle_name" value="bluerov2"/>
